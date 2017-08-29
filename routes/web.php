@@ -20,4 +20,6 @@ Route::group(['prefix' => '/{area}'], function() {
         });
     });
 
+    Route::get('/{listing}', 'Listing\ListingController@show')->name('listings.show');
+
 });
