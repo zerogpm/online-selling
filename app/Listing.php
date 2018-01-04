@@ -4,12 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\Eloquent\OrderableTrait;
+use App\Traits\Eloquent\{OrderableTrait, PivotOrderableTrait};
 
 class Listing extends Model
 {
-    use SoftDeletes;
-    use OrderableTrait;
+    use SoftDeletes, OrderableTrait, PivotOrderableTrait;
 
     public function scopeIsLive($query)
     {

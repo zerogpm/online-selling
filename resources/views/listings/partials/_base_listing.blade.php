@@ -13,5 +13,5 @@
         <li>{{ $listing->user->name }}</li>
     </ul>
 
-    {{ $links }}
+    {{ $links or '' }}
 </div>
