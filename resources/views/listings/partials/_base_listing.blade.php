@@ -11,6 +11,7 @@
     <ul class="list-inline">
         <li><time>{{ $listing->created_at->diffForHumans() }}</time></li>
         <li>{{ $listing->user->name }}</li>
+        <li> viewed {{ $listing->views() }} times</li>
     </ul>
 
     {{ $links or '' }}

@@ -36,7 +36,7 @@
                <div class="panel-body">
                    {!! nl2br(e($listing->body)) !!}
                    <hr>
-                   <p>Views x times</p>
+                   <p>Views {{ $listing->views() }} times</p>
                </div>
            </div>
 
