@@ -23,10 +23,12 @@ Route::group(['prefix' => '/{area}'], function() {
     /**
      * Listings
      */
-    Route::group(['prefix' => '/listing', 'namespace' => 'Listing'], function() {
+    Route::group(['prefix' => '/listings', 'namespace' => 'Listing'], function() {
         Route::post('/{listing}/favourites', 'ListingFavouriteController@store')->name('listings.favourites.store');
         Route::get('/favourites', 'ListingFavouriteController@index')->name('listings.favourites.index');
         Route::delete('{listing}/favourites', 'ListingFavouriteController@destroy')->name('listings.favourites.destroy');
+
+        Route::get('/viewed', 'ListingViewedController@index')->name('listings.viewed.index');
     });
 
     Route::get('/{listing}', 'Listing\ListingController@show')->name('listings.show');
