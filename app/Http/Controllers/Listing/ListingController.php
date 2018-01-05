@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Listing;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\{Area, Category, Listing};
+use App\{
+    Area, Category, Http\Requests\StoreListingFormRequest, Listing
+};
 use App\Jobs\UserViewedListing;
 
 class ListingController extends Controller
@@ -34,7 +36,7 @@ class ListingController extends Controller
         return view('listings.create');
     }
     
-    public function store(Request $request)
+    public function store(StoreListingFormRequest $request)
     {
         $listing = new Listing;
         $listing->title = $request->title;
