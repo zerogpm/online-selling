@@ -8,6 +8,8 @@ use App\{
     Area
 };
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ListingContactCreated;
 
 class ListingContactController extends Controller
 {
@@ -18,6 +20,10 @@ class ListingContactController extends Controller
 
     public function store(StoreListingContactFormRequest $request, Area $area, Listing $listing)
     {
-        dd($listing);
+        Mail::to($listing->user)->queue(
+            new ListingContactCreated($listing, $request->user(), $request->message)
+        );
+
+        return back()->withSuccess("We have sent your message to {$listing->user->name}");
     }
 }
