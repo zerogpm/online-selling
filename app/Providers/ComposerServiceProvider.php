@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Http\ViewComposers\AreaComposer;
+use App\Http\ViewComposers\CreateListingComposer;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,11 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('*', AreaComposer::class);
+
+        View::composer(
+            ['listings.partials.forms._areas', 'listings.partials.forms._categories'],
+            CreateListingComposer::class
+        );
     }
 
     /**
