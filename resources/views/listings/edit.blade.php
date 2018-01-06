@@ -43,6 +43,10 @@
                             <button type="submit" class="btn btn-default">Save</button>
                         </div>
 
+                        @if ($listing->live())
+                            <input type="hidden" name="category_id" value="{{ $listing->category_id }}">
+                        @endif
+
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
                     </form>

@@ -28,11 +28,13 @@ class StoreListingFormRequest extends FormRequest
             'title' => 'required',
             'body' => 'required|max:2000',
             'category_id' => [
+                'required',
                 Rule::exists('categories', 'id')->where(function ($query) {
                     $query->where('usable', true);
                 })
             ],
             'area_id' => [
+                'required',
                 Rule::exists('areas', 'id')->where(function ($query) {
                     $query->where('usable', true);
                 })
