@@ -1,19 +1,18 @@
 <template>
     <form method="post" v-if="loaded">
-        <button type="submit" class="btn btn-primary">Complete</button>
+        <button type="submit" @click.prevent="buy" class="btn btn-primary">Complete</button>
     </form>
 </template>
 
 <script>
     export default {
 
-      props: ['listing', 'price'],
+      props: ['listing'],
 
       data () {
         return {
           loaded: true,
           stripe: null,
-          listPrice: this.price,
           list: this.listing,
           stripeEmail: '',
           stripeToken: '',
@@ -22,6 +21,7 @@
 
       created() {
         let self = this;
+        console.log(this.list);
         this.stripe = StripeCheckout.configure({
           key: keyhash.key,
           image: "https://stripe.com/img/documentation/checkout/marketplace.png",
@@ -36,6 +36,18 @@
               });
           }
         });
+      },
+
+      methods: {
+        buy() {
+
+          this.stripe.open({
+            name: this.list.title,
+            description: this.list.body,
+            zipCode: true,
+            amount: this.list.category.price * 100
+          });
+        },
       },
     }
 </script>

@@ -43039,13 +43039,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-  props: ['listing', 'price'],
+  props: ['listing'],
 
   data: function data() {
     return {
       loaded: true,
       stripe: null,
-      listPrice: this.price,
       list: this.listing,
       stripeEmail: '',
       stripeToken: ''
@@ -43053,6 +43052,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {
     var self = this;
+    console.log(this.list);
     this.stripe = StripeCheckout.configure({
       key: keyhash.key,
       image: "https://stripe.com/img/documentation/checkout/marketplace.png",
@@ -43066,6 +43066,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     });
+  },
+
+
+  methods: {
+    buy: function buy() {
+
+      this.stripe.open({
+        name: this.list.title,
+        description: this.list.body,
+        zipCode: true,
+        amount: this.list.category.price * 100
+      });
+    }
   }
 });
 
@@ -43081,7 +43094,16 @@ var render = function() {
     ? _c("form", { attrs: { method: "post" } }, [
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.buy($event)
+              }
+            }
+          },
           [_vm._v("Complete")]
         )
       ])
